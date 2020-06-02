@@ -11,11 +11,7 @@ app.use(bodyParser.json());
 
 // const db = admin.database();
 
-var serviceAccount = require("./config/fbServiceAccountKey.json");
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
-  databaseURL: "https://walkthrough-968e7.firebaseio.com"
-});
+
 
 // Your web app's Firebase configuration
 var firebaseConfig = {
@@ -31,19 +27,6 @@ var firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 console.log(firebase.app().name);
 
-// const mysql= require('mysql');
-// app.get('/', (req,res)=>{
-//     res.render('hello.ejs');
-// });
-
-// firebase.auth.Auth.Persistence.LOCAL;
-
-// firebase.auth().onAuthStateChanged(function(user){
-//     if(user){
-//         window.location.href="";
-//     }
-// })
-
 
 
 app.use(express.static('public'));
@@ -51,121 +34,20 @@ app.use(express.static('public'));
 app.use(express.urlencoded({ extended: false }));
 
 
-// const connection= mysql.createConnection({
-//     host: 'localhost',
-//     user: 'root',
-//     password: '',
-//     database: 'hoster'
-// });
 
 
 
 
-// connection.connect(function(err){
-//     if(err) throw err;
-//     console.log('connected!');
-
-// });
-
-// function login() {
-
-//   var userEmail = document.getElementById("username_login").value;
-//   var userPassword = document.getElementById("password_login").value;
-
-//   firebase.auth().signInWithEmailAndPassword(userEmail, userPassword).catch(function (error) {
-//     // Handle Errors here.
-//     if (error) {
-//       var errorCode = error.code;
-//       var errorMessage = error.message;
-//       window.alert("Error : " + errorMessage);
-
-//     }
-//     else {
-//       window.alert("Logged in : ");
-//     }
-//     // ...
-//   });
-
-// }
-
-// function checkAuth(req, res, next) {
-//     if (req.headers.authtoken) {
-//       admin.auth().verifyIdToken(req.headers.authtoken)
-//         .then(() => {
-//           next()
-//         }).catch(() => {
-//           res.status(403).send('Unauthorized')
-//         });
-//     } else {
-//       res.status(403).send('Unauthorized')
-//     }
-//   }
-
-//   app.use('/', checkAuth)
 
 
 
-
-function logout() {
-  firebase.auth.signOut().then(function () {
-    window.alert("Loged Out ");
-
-  }).catch(function (error) {
-    window.alert("Error logging out");
-
-  });
-}
 
 // const db = firebase.database();
 
+
+
+
 app.get('/', (req, res) => {
-  //display this page
-  res.render('signup.ejs');
-  //Insert key,value pair to database
-  // firebase.database().ref('/admin').set({testUser: 'working1'});
-  
-  console.log("working");
-  // console.log(uuid());
-});
-
-function signup(){
-  // firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
-  //   // Handle Errors here.
-  //   var errorCode = error.code;
-  //   var errorMessage = error.message;
-  //   // ...
-  // });
-  console.log("clicked");
-}
-
-
-
-
-// app.post('/main',(req, res)=>{
-//     var name = req.body.Name;
-//     var fname = req.body.Fname;
-//     var email = req.body.Email;
-//     var phone = req.body.Phone;
-//     var address = req.body.Address;
-//     var district = req.body.District;
-//     var pincode = req.body.Pincode;
-//     var postOffice = req.body.PostOffice;
-//     var state = req.body.State;
-//     var aadharNumber = req.body.AadharNumber;
-//     var UID = uuid();
-//     var referencePath = '/requests/'+  +'/';
-//     var userReference = firebase.database().ref(referencePath);
-//     var userData = { Uid:UID, Name:name,Father_Name:fname,Email:email, Phone_no:phone, Address:address, District:district, Pincode:pincode, Post_Office:postOffice, State:state, Aadhar_Number:aadharNumber}
-//     // userDatas = [userData];
-//     userReference.update(userData);
-//     //display this page
-//     console.log(userData);
-//     // console.log(userDatas.Uid);
-//     res.render('main.ejs',{userData});
-// });
-
-
-app.get('/userInfo', (req, res) => {
   //display this page
   var userReference = firebase.database().ref("/requests/");
   userReference.on("value",
@@ -196,19 +78,7 @@ app.get('/userInfo', (req, res) => {
     });
 });
 
-app.get('/userForm', (req, res) => {
-  //display this page
-  res.render('userForm.ejs');
-});
 
-// app.get('/index', (req,res)=>{
-//     connection.query('SELECT * FROM Travel_List',
-//     (error, results)=>{
-//         // console.log(results);
-//         res.render('index.ejs',{item:results});
-//         }
-//     );
-// });
 
 
 
