@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="/css/styles.css">
+
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+    <title>PanFC</title>
+</head>
+
+<body style="background-color:#FDFFFC;">
+    <h1>
+        Applicant details:
+    </h1>
+    <div>
+        <table class="table" cellpadding="2" cellspacing="2" border="1px solid black">
+            <tr>
+                <th>Uid</th>
+                <th>aadharnumber</th>
+                <th>address</th>
+                <th>category</th>
+                <th>district</th>
+                <th>email</th>
+                <th>fathername</th>
+                <th>gender</th>
+                <th>name</th>
+                <th>payment</th>
+                <th>phone</th>
+                <th>pincode</th>
+                <th>postoffice</th>
+                <th>state</th>
+                <th>time</th>
+                <th>title</th>
+                <th>transactionId</th>
+                <th>type</th>
+                <th>documents</th>
+            </tr>
+            <%for(var it in userArr){%>
+            <tr>
+                <td><%=userArr[it].Uid%></td>
+                <td><%=userArr[it].aadharnumber%></td>
+                <td><%=userArr[it].address%></td>
+                <td><%=userArr[it].categoty%></td>
+                <td><%=userArr[it].district%></td>
+                <td><%=userArr[it].email%></td>
+                <td><%=userArr[it].fathername%></td>
+                <td><%=userArr[it].gender%></td>
+                <td><%=userArr[it].name%></td>
+                <td><%=userArr[it].payment%></td>
+                <td><%=userArr[it].phone%></td>
+                <td><%=userArr[it].pincode%></td>
+                <td><%=userArr[it].postoffice%></td>
+                <td><%=userArr[it].state%></td>
+                <td><%=userArr[it].time%></td>
+                <td><%=userArr[it].title%></td>
+                <td><%=userArr[it].transactionId%></td>
+                <td><%=userArr[it].type%></td>
+                <td>Birth_certificate:<br /><a href="<%=userArr[it].documents.Birth_certificate%>"><%=userArr[it].documents.Birth_certificate%></a></td>
+                <td>Photo:<br /><a href="<%=userArr[it].documents.Photo%>"><%=userArr[it].documents.Photo%></a></td>
+                <td>Voter_card:<br /><a href="<%=userArr[it].documents.Voter_card%>"><%=userArr[it].documents.Voter_card%></a></td>
+                <td>signature:<br /><a href="<%=userArr[it].documents.signature%>"><%=userArr[it].documents.signature%></a></td>
+                <td>Driving_licence:<br /><a href="<%=userArr[it].documents.Driving_licence%>"><%=userArr[it].documents.Driving_licence%></a></td>
+                <td>Matrix_admit_card:<br /><a href="<%=userArr[it].documents.Matrix_admit_card%>"><%=userArr[it].documents.Matrix_admit_card%></a></td>
+
+
+
+
+
+            </tr>
+            <%}%>
+            
+        </table>
+    </div><br><br>
+
+    <a href="/userForm" onclick="logout()">logout</a>
+
+</body>
+
+</html>
