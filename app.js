@@ -45,7 +45,9 @@ app.use(express.urlencoded({ extended: false }));
 // const db = firebase.database();
 
 
-
+app.get('/login', (req, res)=>{
+  res.render(index.ejs);
+})
 
 app.get('/', (req, res) => {
   //display this page
