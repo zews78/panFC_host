@@ -13,76 +13,201 @@
 </head>
 
 <body style="background-color:#FDFFFC;">
-    <h1>
-        Applicant details:
-    </h1>
-    <div>
-        <table class="table" cellpadding="2" cellspacing="2" border="1px solid black">
-            <tr>
-                <th>type</th>
-                <th>title</th>
-                <th>category</th>
-                <th>name</th>
-                <th>fathername</th>
-                <th>address</th>
-                <th>pincode</th>
-                <th>district</th>
-                <th>state</th>
-                <th>postoffice</th>
-                <th>email</th>
-                <th>phone</th>
-                <th>gender</th>
-                <th>aadharnumber</th>
-                <th>payment</th>
-                <th>time</th>
-                <th>transactionId</th>
-                <th>documents</th>
-            </tr>
-            <%for(var it in userArr){%>
-            <tr>
-                <td><%=userArr[it].type%></td>
-                <td><%=userArr[it].title%></td>
-                <td><%=userArr[it].categoty%></td>
-                <td><%=userArr[it].name%></td>
-                <td><%=userArr[it].fathername%></td>
-                <td><%=userArr[it].address%></td>
-                <td><%=userArr[it].pincode%></td>
-                <td><%=userArr[it].district%></td>
-                <td><%=userArr[it].state%></td>
-                <td><%=userArr[it].postoffice%></td>
-                <td><%=userArr[it].email%></td>
-                <td><%=userArr[it].phone%></td>
-                <td><%=userArr[it].gender%></td>
-                <td><%=userArr[it].aadharnumber%></td>
-                <td><%=userArr[it].payment%></td>
-                <td><%=userArr[it].time%></td>
-                <td><%=userArr[it].transactionId%></td>
-                <td>
-                    <table>
-                        <td>Addres_proof:<br /><a href="<%=userArr[it].documents.Addres_proof%>"><%=userArr[it].documents.Addres_proof%></a></td>
-                        <td>Address_back:<br /><a href="<%=userArr[it].documents.Address_back%>"><%=userArr[it].documents.Address_back%></a></td>
-                        <td>Birth_proof:<br /><a href="<%=userArr[it].documents.Birth_proof%>"><%=userArr[it].documents.Birth_proof%></a></td>
-                        <td>Identity_proof:<br /><a href="<%=userArr[it].documents.Identity_proof%>"><%=userArr[it].documents.Identity_proof%></a></td>
-                        <td>Photo:<br /><a href="<%=userArr[it].documents.Photo%>"><%=userArr[it].documents.Photo%></a></td>
-                        <td>Identity_back:<br /><a href="<%=userArr[it].documents.Identity_back%>"><%=userArr[it].documents.Identity_back%></a></td>
-                        <td>Signature:<br /><a href="<%=userArr[it].documents.Signature%>"><%=userArr[it].documents.Signature%></a></td>
 
-                    </table>
+    <div class="main" id="loggedOut">
+        <p class="sign" align="center">Sign in PanFC</p>
+        <form class="form1">
+            <input class="un " type="text" align="center" placeholder="Email" id="username_login">
+            <input class="pass" type="password" align="center" placeholder="Password" id="password_login">
+        </form>
+        <button class="submit" align="center" onclick="login()">Login</button>
+        <p class="forgot" align="center" onclick="logout()">Forgot Password?</p>
+    </div>
 
-                </td>
+    <div class="main" id="userloggedIn" style="background-color: aqua;"><br><br>
+        <h4>You are not admin:</h4>
+        <p>This is only login portal for admins.</p>
+        <p>To login as a user please login from our mobile App</p>
+
+        <p id="uidVal"><%=dataValue.uid%></p>
+        <button onclick="logout()">Logout</button>
+    </div>
+
+    <div id="adminloggedIn">
+        <h1>
+            Applicant details:
+        </h1>
+        <div>
+            <table class="table" cellpadding="2" cellspacing="2" border="1px solid black">
+                <tr>
+                    <th>type</th>
+                    <th>title</th>
+                    <th>category</th>
+                    <th>name</th>
+                    <th>fathername</th>
+                    <th>address</th>
+                    <th>pincode</th>
+                    <th>district</th>
+                    <th>state</th>
+                    <th>postoffice</th>
+                    <th>email</th>
+                    <th>phone</th>
+                    <th>gender</th>
+                    <th>aadharnumber</th>
+                    <th>payment</th>
+                    <th>time</th>
+                    <th>transactionId</th>
+                    <th>documents</th>
+                </tr>
+                <%for(var it in userArr){%>
+                <tr>
+                    <td><%=userArr[it].type%></td>
+                    <td><%=userArr[it].title%></td>
+                    <td><%=userArr[it].categoty%></td>
+                    <td><%=userArr[it].name%></td>
+                    <td><%=userArr[it].fathername%></td>
+                    <td><%=userArr[it].address%></td>
+                    <td><%=userArr[it].pincode%></td>
+                    <td><%=userArr[it].district%></td>
+                    <td><%=userArr[it].state%></td>
+                    <td><%=userArr[it].postoffice%></td>
+                    <td><%=userArr[it].email%></td>
+                    <td><%=userArr[it].phone%></td>
+                    <td><%=userArr[it].gender%></td>
+                    <td><%=userArr[it].aadharnumber%></td>
+                    <td><%=userArr[it].payment%></td>
+                    <td><%=userArr[it].time%></td>
+                    <td><%=userArr[it].transactionId%></td>
+                    <td>
+                        <table>
+                            <td>Addres_proof:<br /><a
+                                    href="<%=userArr[it].documents.Addres_proof%>"><%=userArr[it].documents.Addres_proof%></a>
+                            </td>
+                            <td>Address_back:<br /><a
+                                    href="<%=userArr[it].documents.Address_back%>"><%=userArr[it].documents.Address_back%></a>
+                            </td>
+                            <td>Birth_proof:<br /><a
+                                    href="<%=userArr[it].documents.Birth_proof%>"><%=userArr[it].documents.Birth_proof%></a>
+                            </td>
+                            <td>Identity_proof:<br /><a
+                                    href="<%=userArr[it].documents.Identity_proof%>"><%=userArr[it].documents.Identity_proof%></a>
+                            </td>
+                            <td>Photo:<br /><a
+                                    href="<%=userArr[it].documents.Photo%>"><%=userArr[it].documents.Photo%></a></td>
+                            <td>Identity_back:<br /><a
+                                    href="<%=userArr[it].documents.Identity_back%>"><%=userArr[it].documents.Identity_back%></a>
+                            </td>
+                            <td>Signature:<br /><a
+                                    href="<%=userArr[it].documents.Signature%>"><%=userArr[it].documents.Signature%></a>
+                            </td>
+
+                        </table>
+                    </td>
+                </tr>
+                <%}%>
+                  
+              </table>
+          </div><br><br>
+      
+          <button onclick="logout()">logout</button>
+
+      </div>
+
+
+  <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+  <script src="https://www.gstatic.com/firebasejs/7.14.6/firebase-app.js"></script>
+
+  <!-- If you enabled Analytics in your project, add the Firebase SDK for Analytics -->
+  <script src="https://www.gstatic.com/firebasejs/7.14.6/firebase-analytics.js"></script>
+
+  <!-- Add Firebase products that you want to use -->
+  <script src="https://www.gstatic.com/firebasejs/7.14.6/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.14.6/firebase-firestore.js"></script>
+
+  <script type="text/javascript">
+
+
+    // Your web app's Firebase configuration
+    var firebaseConfig = {
+        apiKey: "AIzaSyB05uvl4J9YRH7AP-AL4QkZrXBjpOGeiM0",
+        authDomain: "walkthrough-968e7.firebaseapp.com",
+        databaseURL: "https://walkthrough-968e7.firebaseio.com",
+        projectId: "walkthrough-968e7",
+        storageBucket: "walkthrough-968e7.appspot.com",
+        messagingSenderId: "1007004101770",
+        appId: "1:1007004101770:web:c3f7a4e08f3c8b72931173"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+
+
+    function login() {
+      var userEmail = document.getElementById("username_login").value;
+      var userPassword = document.getElementById("password_login").value;
+      firebase.auth().signInWithEmailAndPassword(userEmail, userPassword).catch(function (error) {
+        // Handle Errors here.
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        window.alert("error :" + errorMessage);
+        // ...
+      });
+      // window.alert(userEmail+" "+userPassword);
+      console.log("login clicked");
+
+    };
+
+
+    function logout() {
+        console.log("clikedddd");
+        firebase.auth().signOut().then(function () {
+            // Sign-out successful.
+            window.alert("signed out successfully");
+        }).catch(function (error) {
+            // An error happened.
+            window.alert("failed singing out");
+        });
+
+    }
+
+
+    console.log(arr)
+
+    var uidVal1 = document.getElementById('uidVal').innerHTML;
+    document.getElementById('uidVal').style.display = "none";
+
+    firebase.auth().onAuthStateChanged(function (user) {
+      if (user) {
+        if (user.uid === uidVal1) {
+          // window.location.href = "";
+          window.alert("you are logged in");
+          document.getElementById("adminloggedIn").style.display = "block";
+          document.getElementById("userloggedIn").style.display = "none";
+          document.getElementById("loggedOut").style.display = "none";
+
+          // console.log(user.uid);
+          // console.log(uidVal1);
+
+        } else {
+          document.getElementById("userloggedIn").style.display = "block";
+          document.getElementById("loggedOut").style.display = "none";
+          document.getElementById("adminloggedIn").style.display = "none";
+          // console.log("hola");
+          window.alert("You are not admin");
+        }
+
+      }
+      else {
+        document.getElementById("userloggedIn").style.display = "none";
+        document.getElementById("loggedOut").style.display = "block";
+        document.getElementById("adminloggedIn").style.display = "none";
+
+      }
+    });
 
 
 
 
-
-            </tr>
-            <%}%>
-            
-        </table>
-    </div><br><br>
-
-    <a href="/userForm" onclick="logout()">logout</a>
-
+</script>
 </body>
 
 </html>
