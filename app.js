@@ -37,7 +37,16 @@ app.use(express.urlencoded({ extended: false }));
 
 
 
-
+app.get('/index', (req, res) => {
+  //display this page
+  // res.render('signup.ejs');
+  var adminReference = firebase.database().ref("/admin/");
+  adminReference.once("value",
+  function (snapshot){
+    dataValue=snapshot.val();
+    console.log(dataValue.uid);
+    res.render('index.ejs',{dataValue});
+  })
 
 
 
