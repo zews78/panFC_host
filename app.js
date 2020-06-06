@@ -6,6 +6,8 @@ const bodyParser = require("body-parser");
 const { uuid } = require('uuidv4');
 // import {v4 as uuidv4} from 'uuid';
 
+var PORT = process.env.PORT || 5000
+
 //need to parse HTTP request body
 app.use(bodyParser.json());
 
@@ -37,16 +39,7 @@ app.use(express.urlencoded({ extended: false }));
 
 
 
-app.get('/index', (req, res) => {
-  //display this page
-  // res.render('signup.ejs');
-  var adminReference = firebase.database().ref("/admin/");
-  adminReference.once("value",
-  function (snapshot){
-    dataValue=snapshot.val();
-    console.log(dataValue.uid);
-    res.render('index.ejs',{dataValue});
-  })
+
 
 
 
@@ -54,9 +47,7 @@ app.get('/index', (req, res) => {
 // const db = firebase.database();
 
 
-app.get('/login', (req, res)=>{
-  res.render(index.ejs);
-})
+
 
 app.get('/', (req, res) => {
   //display this page
@@ -84,16 +75,18 @@ app.get('/', (req, res) => {
         })
         userReference.off("value");
       })
-      console.log(userArr[0]);
-      res.render('userInfo.ejs',{userArr});
+      var adminReference = firebase.database().ref("/admin/");
+      adminReference.once("value",
+      function (snapshot){
+        dataValue=snapshot.val();
+        console.log(dataValue.uid);
+        res.render('userInfo.ejs', { userArr, dataValue });
+      })
     });
 });
 
 
-
-
-
-
-
-
-app.listen(3001);
+  
+app.listen(PORT, ()=>{
+console.log(`listening on ${ PORT }`)
+});
