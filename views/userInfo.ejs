@@ -21,7 +21,7 @@
             <input class="pass" type="password" align="center" placeholder="Password" id="password_login">
         </form>
         <button class="submit" align="center" onclick="login()">Login</button>
-        <p class="forgot" align="center" onclick="logout()">Forgot Password?</p>
+        <p class="forgot" align="center">Forgot Password?</p>
     </div>
 
     <div class="main" id="userloggedIn" style="background-color: aqua;"><br><br>
@@ -81,7 +81,7 @@
                     <td>
                         <table>
                             <td>Addres_proof:<br /><a
-                                    href="<%=userArr[it].documents.Addres_proof%>"><%=userArr[it].documents.Addres_proof%></a>
+                                    href="<%=userArr[it].documents.Address_proof%>"><%=userArr[it].documents.Address_proof%></a>
                             </td>
                             <td>Address_back:<br /><a
                                     href="<%=userArr[it].documents.Address_back%>"><%=userArr[it].documents.Address_back%></a>
@@ -170,7 +170,7 @@
     }
 
 
-    console.log(arr)
+    
 
     var uidVal1 = document.getElementById('uidVal').innerHTML;
     document.getElementById('uidVal').style.display = "none";
@@ -179,7 +179,7 @@
       if (user) {
         if (user.uid === uidVal1) {
           // window.location.href = "";
-          window.alert("you are logged in");
+          window.alert("Successfully logged in");
           document.getElementById("adminloggedIn").style.display = "block";
           document.getElementById("userloggedIn").style.display = "none";
           document.getElementById("loggedOut").style.display = "none";
