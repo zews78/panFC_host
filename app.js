@@ -36,7 +36,20 @@ app.use(express.static('public'));
 app.use(express.urlencoded({ extended: false }));
 
 
-
+app.post("/change", (req, res) => {
+  var uid = req.body.uid;
+  var name = req.body.Name;
+  var status = req.body.Status;
+  var fstat = (status === "true");
+  var fxstat = !fstat;
+  var referencePath = "/requests/"+ uid +"/"+ name;
+  var Reference = firebase.database().ref(referencePath);
+  // console.log(status);
+  // console.log(fstat);
+  // console.log(fxstat);
+  Reference.update({ done: fxstat });
+  res.redirect("/userInfo");
+});
 
 
 
