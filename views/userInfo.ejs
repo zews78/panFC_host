@@ -2,29 +2,29 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/styles.css" />
 
-    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
-    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet" />
+    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css" />
     <title>PanFC</title>
 </head>
 
-<body style="background-color:#FDFFFC;">
-
+<body style="background-color: #fdfffc;">
     <div class="main" id="loggedOut">
         <p class="sign" align="center">Sign in PanFC</p>
         <form class="form1">
-            <input class="un " type="text" align="center" placeholder="Email" id="username_login">
-            <input class="pass" type="password" align="center" placeholder="Password" id="password_login">
+            <input class="un" type="text" align="center" placeholder="Email" id="username_login" />
+            <input class="pass" type="password" align="center" placeholder="Password" id="password_login" />
         </form>
         <button class="submit" align="center" onclick="login()">Login</button>
-        <p class="forgot" align="center">Forgot Password?</p>
+        <p class="forgot" align="center" onclick="logout()">Forgot Password?</p>
     </div>
 
-    <div class="main" id="userloggedIn" style="background-color: aqua;"><br><br>
+    <div class="main" id="userloggedIn" style="background-color: aqua;">
+        <br /><br />
         <h4>You are not admin:</h4>
         <p>This is only login portal for admins.</p>
         <p>To login as a user please login from our mobile App</p>
@@ -40,6 +40,8 @@
         <div>
             <table class="table" cellpadding="2" cellspacing="2" border="1px solid black">
                 <tr>
+                    <th>Action</th>
+                    <th>Status</th>
                     <th>type</th>
                     <th>title</th>
                     <th>category</th>
@@ -60,7 +62,24 @@
                     <th>documents</th>
                 </tr>
                 <%for(var it in userArr){%>
-                <tr>
+                <tr uid-id="<%=userArr[it].Uid%>">
+
+                    <td>
+                        <form action="/change" method="post">
+                            <input style="display: none;" type="text" value="<%=userArr[it].Uid%>" name="uid">
+                            <input style="display: none;" type="text" value="<%=userArr[it].name%>" name="Name">
+                            <input style="display: none;" type="text" value="<%=userArr[it].done%>" name="Status">
+
+                            <input onclick="changer(it)" type="submit" value="Change" />
+                        </form>
+                    </td>
+                    <td id="status">
+                        <%if(userArr[it].done === true){%>
+                        <img height="35px" width="35px" src="/images/tick.png">
+                        <%}else{%>
+                        <img height="35px" width="35px" src="/images/timer.png">
+                        <%}%>
+                    </td>
                     <td><%=userArr[it].type%></td>
                     <td><%=userArr[it].title%></td>
                     <td><%=userArr[it].categoty%></td>
@@ -80,38 +99,44 @@
                     <td><%=userArr[it].transactionId%></td>
                     <td>
                         <table>
-                            <td>Addres_proof:<br /><a
+                            <td>
+                                Addres_proof:<br /><a
                                     href="<%=userArr[it].documents.Address_proof%>"><%=userArr[it].documents.Address_proof%></a>
                             </td>
-                            <td>Address_back:<br /><a
+                            <td>
+                                Address_back:<br /><a
                                     href="<%=userArr[it].documents.Address_back%>"><%=userArr[it].documents.Address_back%></a>
                             </td>
-                            <td>Birth_proof:<br /><a
+                            <td>
+                                Birth_proof:<br /><a
                                     href="<%=userArr[it].documents.Birth_proof%>"><%=userArr[it].documents.Birth_proof%></a>
                             </td>
-                            <td>Identity_proof:<br /><a
+                            <td>
+                                Identity_proof:<br /><a
                                     href="<%=userArr[it].documents.Identity_proof%>"><%=userArr[it].documents.Identity_proof%></a>
                             </td>
-                            <td>Photo:<br /><a
-                                    href="<%=userArr[it].documents.Photo%>"><%=userArr[it].documents.Photo%></a></td>
-                            <td>Identity_back:<br /><a
+                            <td>
+                                Photo:<br /><a
+                                    href="<%=userArr[it].documents.Photo%>"><%=userArr[it].documents.Photo%></a>
+                            </td>
+                            <td>
+                                Identity_back:<br /><a
                                     href="<%=userArr[it].documents.Identity_back%>"><%=userArr[it].documents.Identity_back%></a>
                             </td>
-                            <td>Signature:<br /><a
+                            <td>
+                                Signature:<br /><a
                                     href="<%=userArr[it].documents.Signature%>"><%=userArr[it].documents.Signature%></a>
                             </td>
-
                         </table>
                     </td>
                 </tr>
                 <%}%>
-                  
-              </table>
-          </div><br><br>
-      
-          <button onclick="logout()">logout</button>
-
+        </table>
       </div>
+      <br /><br />
+
+      <button onclick="logout()">logout</button>
+    </div>
 
 
   <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
